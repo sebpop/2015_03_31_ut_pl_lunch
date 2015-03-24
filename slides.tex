@@ -25,4 +25,41 @@
   \end{itemize}
 }
 
+\frame{
+  benchmarks
+  \begin{itemize}
+  \item avoid regressions: correctness, performance
+  \item code is fixed, compiler changes
+  \end{itemize}
+
+  systems
+  \begin{itemize}
+  \item program and compiler change
+  \item why fixing the compiler when source code can be improved?
+  \end{itemize}
+}
+
+\frame{
+  Compilation process: pass pipeline
+}
+
+\frame{
+  Scheduler
+}
+
+\frame{
+  loop transforms
+}
+
+\frame{
+  autoFDO
+  \begin{itemize}
+  \item LTO: 6\% speedup on SPEC benchmarks
+  \item PGO: -1\% degradation on SPEC
+  \item LTO + PGO: 12\% speedup on SPEC
+  \end{itemize}
+  Non linear speedup, as knowing more about the program helps.
+}
+
+
 \end{document}
