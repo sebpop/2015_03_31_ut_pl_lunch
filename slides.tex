@@ -1,12 +1,12 @@
 \documentclass{beamer}
 \begin{document}
-\title{Compilers}   
+\title{Compilers}
 \author{Aditya Kumar, Sebastian Pop}
-\date{\today} 
+\date{\today}
 
-\frame{\titlepage} 
+\frame{\titlepage}
 
-\frame{\frametitle{Why compilers are interesting} 
+\frame{\frametitle{Why compilers are interesting}
   \begin{itemize}
   \item GCC
   \item LLVM
@@ -20,7 +20,7 @@
   \item Making program faster
   \item Shrinking executable size
   \item Security
-  \item Static analysis
+  \item Program analysis/transformation
   \item Obfuscation
   \end{itemize}
 }
@@ -41,6 +41,14 @@
 
 \frame{
   Compilation process: pass pipeline
+\begin{itemize}
+\item Preprocessing
+\item Parsing+Syntax Analysis
+\item Lowering to IR
+\item Optimization
+\item Emitting assembly
+\item Assembler emits object code
+\item Linker generates executable/library
 }
 
 \frame{
@@ -60,6 +68,4 @@
   \end{itemize}
   Non linear speedup, as knowing more about the program helps.
 }
-
-
 \end{document}
