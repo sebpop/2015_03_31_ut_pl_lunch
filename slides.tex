@@ -2,31 +2,14 @@
 \begin{document}
 \title{Compiler Development in Industry}
 \author{Aditya Kumar and Sebastian Pop}
-\institute{SARC: Samsung Austin Research Center}
+\institute{SARC: Samsung Austin R\&D Center}
 \date{March 31, 2015}
 %\date{\today}
 
 \frame{\titlepage}
 
-\frame{\frametitle{What sorts of things does a compiler engineer do?}
-  day-to-day, working on:
+\frame{\frametitle{Why is working on compilers interesting?}
   \begin{itemize}
-  \item optimizations
-  \item implementing language extensions
-  \item improving the breadth of support for hardware features
-  \item working with several teams (from different labs)
-  \item in open source, collaborate with different companies
-  \item retargetting a compiler to company's new processor
-  \item FP/int arithmetics, static analysis, machine learning \ldots{}
-  \item mostly working on state-of-the-art systems and technologies
-  \item fixing bugs and keeping systems running
-  \item reading and writing research papers
-  \end{itemize}
-}
-
-\frame{\frametitle{Why compilers are interesting}
-  \begin{itemize}
-  \item compiling programs
   \item making program execution faster
   \item shrinking executable size
   \item detecting security issues
@@ -35,19 +18,34 @@
   \end{itemize}
 }
 
-\frame{\frametitle{What drives compiler developments?}
+\frame{\frametitle{What sorts of things does a compiler engineer do?}
+  day-to-day, working on:
+  \begin{itemize}
+  \item optimizations
+  \item implementing language extensions
+  \item improving the breadth of support for hardware features
+  \item working with several teams, with open source community
+  \item retargetting a compiler to new processors
+  \item FP/int arithmetics, static analysis, machine learning \ldots{}
+  \item state-of-the-art systems and technologies
+  \item fixing bugs and keeping systems running
+  \item reading and writing research papers
+  \end{itemize}
+}
+
+\frame{\frametitle{What drives compiler development?}
   \begin{itemize}
   \item microprocessor and architecture changes
     \begin{itemize}
     \item changes to the ISA: add new instructions, intrinsics
     \item memory and pipeline model: latency of instructions
     \end{itemize}
-  \item benchmarks (SPEC, EEMBC, Geekbench, PARSEC, \ldots{})
+  \item benchmarks (SPEC, EEMBC, PARSEC, \ldots{})
     \begin{itemize}
     \item avoid regressions: correctness, performance
     \item code is fixed, compiler changes
     \item performance analysis: compare perf of different compilers
-    \item profiling critical path, analyzing assembler, perf counters
+    \item profiling critical path, analyzing assembly, perf counters
     \end{itemize}
   \item systems (LAMP stack, Android, Hadoop, \ldots{})
     \begin{itemize}
@@ -60,8 +58,8 @@
 \frame{\frametitle{Performance analysis and bug reports}
   on the hot path:
   \begin{itemize}
-  \item how to increase IPC, ILP, use of SIMD, parallelism, \ldots{}
-  \item how to decrease memory transactions, latency, \ldots{}
+  \item how to increase IPC, ILP, use of SIMD, multi-threading, \ldots{}
+  \item how to reduce memory transactions, latency, \ldots{}
   \item why existing optimizations do not apply?
   \item print the IR and decisions of each pass
   \item testcase reduction: delta, c-reduce, bugpoint (LLVM)
@@ -78,14 +76,16 @@
   \item pattern matching optimizations may not trigger
   \end{itemize}
 
+  \vspace{.5cm}
+
   How do we keep track of the impact of all these changes?
   \begin{itemize}
   \item nightly testsuite runs
   \item only variable: revisions of the compiler
-  \item perf and correctness regression detection
-  \item noise, smoothing, statistics, derivatives, etc.
-  \item git bisect is awesome
-  \item community report as a bug
+  \item identify perf, size, compile time, and correctness regressions
+  \item statistical methods: noise, smoothing, derivatives, etc.
+  \item {\tt git bisect} is awesome
+  \item report bug to community
   \end{itemize}
 }
 
@@ -93,7 +93,7 @@
   \begin{itemize}
   \item GCC
     \begin{itemize}
-    \item released once a year, quality based release (no P1 bugs)
+    \item released once a year, quality based release
     \item dev stages: new development, bug fixing, regression only
     \item release branches only accept regression fixes backports
     \item released compilers are supported for several years
@@ -110,10 +110,10 @@
 
 \frame{\frametitle{Compiler engineering perspectives}
   \begin{itemize}
-  \item number of compiler engineering positions are increasing
-  \item ARM ecosystem adds more processor variety and new architectures on the market
-  \item many HW companies have compiler teams
-  \item compiler teams are as central to the technology performance as microprocessor architecture teams
+  \item many companies have compiler teams
+  \item number of compiler engineering positions is increasing
+  \item ARM ecosystem adds more processor variations and new architectures to the market
+  \item compiler teams are as important as architecture teams to the success of new processors
   \end{itemize}
 }
 
