@@ -7,9 +7,17 @@
 \frame{\titlepage}
 
 \frame{\frametitle{Why compilers are interesting}
+  What sorts of things does a compiler engineer do, day-to-day?
   \begin{itemize}
-  \item GCC
-  \item LLVM
+  \item ...working on optimizations, implementing language extensions, reading research papers,
+  improving the breadth of support for hardware features, working with several research teams
+  (from different labs), writing research papers, retargetting an existing compiler to the
+  company's new processor, working on Floating Point arithmetics, static analysis, machine learning ...
+
+  Reference: \url{http://www.reddit.com/r/compsci/comments/jbg6z/what_sorts_of_things_does_a_compiler_engineer_do/}
+  \item Open source compiler engineers collaborate with teams from different companies
+  \item Mostly working on state-of-the-art systems and technologies
+  \item Programming languages and Computer architecture keep evolving
   \end{itemize}
 }
 
@@ -56,8 +64,35 @@
   Scheduler:
   \begin{itemize}
   \item Objective: Moving instructions around for improving performance
-  \item Analysis: Alias, Control Flow, Dependency
+  \item Analysis: Alias, Control Flow, Data Dependence
   \item Constraints: Target hardware resources, Compilation time, Memory usage
+  \end{itemize}
+}
+
+\frame{
+  Objective:
+  \begin{itemize}
+  \item Local as well as global scheduling
+  \item Moving instructions up/down
+  \item Profile information helpful in selecting code patch
+  \end{itemize}
+}
+
+\frame{
+  Analysis:
+  \begin{itemize}
+  \item Data dependence (True, Anti, Output)
+  \item Control dependence
+  \item Static analysis to identify frequently executed program points
+  \end{itemize}
+}
+
+\frame{
+  Constraints:
+  \begin{itemize}
+  \item Cost model to estimate resources
+  \item Timing constraints specified by the architecture
+  \item Limited program visibility
   \end{itemize}
 }
 
