@@ -1,112 +1,124 @@
 \documentclass{beamer}
 \begin{document}
-\title{Compilers}
-\author{Aditya Kumar, Sebastian Pop}
-\date{\today}
+\title{Compiler Development in Industry}
+\author{Aditya Kumar and Sebastian Pop}
+\institute{SARC: Samsung Austin Research Center}
+\date{March 31, 2015}
+%\date{\today}
 
 \frame{\titlepage}
 
+\frame{\frametitle{What sorts of things does a compiler engineer do?}
+  day-to-day, working on:
+  \begin{itemize}
+  \item optimizations
+  \item implementing language extensions
+  \item improving the breadth of support for hardware features
+  \item working with several teams (from different labs)
+  \item in open source, collaborate with different companies
+  \item retargetting a compiler to company's new processor
+  \item FP/int arithmetics, static analysis, machine learning \ldots{}
+  \item mostly working on state-of-the-art systems and technologies
+  \item fixing bugs and keeping systems running
+  \item reading and writing research papers
+  \end{itemize}
+}
+
 \frame{\frametitle{Why compilers are interesting}
-  What sorts of things does a compiler engineer do, day-to-day?
   \begin{itemize}
-  \item ...working on optimizations, implementing language extensions, reading research papers,
-  improving the breadth of support for hardware features, working with several research teams
-  (from different labs), writing research papers, retargetting an existing compiler to the
-  company's new processor, working on Floating Point arithmetics, static analysis, machine learning ...
-
-  Reference: \url{http://www.reddit.com/r/compsci/comments/jbg6z/what_sorts_of_things_does_a_compiler_engineer_do/}
-  \item Open source compiler engineers collaborate with teams from different companies
-  \item Mostly working on state-of-the-art systems and technologies
-  \item Programming languages and Computer architecture keep evolving
+  \item compiling programs
+  \item making program execution faster
+  \item shrinking executable size
+  \item detecting security issues
+  \item program analysis and transformation
+  \item obfuscation
   \end{itemize}
 }
 
-\frame{
-  Applications:
+\frame{\frametitle{What drives compiler developments?}
   \begin{itemize}
-  \item Compiling programs
-  \item Making program faster
-  \item Shrinking executable size
-  \item Security
-  \item Program analysis/transformation
-  \item Obfuscation
+  \item microprocessor and architecture changes
+    \begin{itemize}
+    \item changes to the ISA: add new instructions, intrinsics
+    \item memory and pipeline model: latency of instructions
+    \end{itemize}
+  \item benchmarks (SPEC, EEMBC, Geekbench, PARSEC, \ldots{})
+    \begin{itemize}
+    \item avoid regressions: correctness, performance
+    \item code is fixed, compiler changes
+    \item performance analysis: compare perf of different compilers
+    \item profiling critical path, analyzing assembler, perf counters
+    \end{itemize}
+  \item systems (LAMP stack, Android, Hadoop, \ldots{})
+    \begin{itemize}
+    \item program and compiler can change
+    \item why fixing the compiler when source code can be improved?
+    \end{itemize}
   \end{itemize}
 }
 
-\frame{
-  benchmarks
+\frame{\frametitle{Performance analysis and bug reports}
+  on the hot path:
   \begin{itemize}
-  \item avoid regressions: correctness, performance
-  \item code is fixed, compiler changes
-  \end{itemize}
-
-  systems
-  \begin{itemize}
-  \item program and compiler change
-  \item why fixing the compiler when source code can be improved?
-  \end{itemize}
-}
-
-\frame{
-  Compilation process: pass pipeline
-  \begin{itemize}
-  \item Preprocessing
-  \item Parsing+Syntax Analysis
-  \item Lowering to IR
-  \item Optimization
-  \item Emitting assembly
-  \item Assembler emits object code
-  \item Linker generates executable/library
+  \item how to increase IPC, ILP, use of SIMD, parallelism, \ldots{}
+  \item how to decrease memory transactions, latency, \ldots{}
+  \item why existing optimizations do not apply?
+  \item print the IR and decisions of each pass
+  \item testcase reduction: delta, c-reduce, bugpoint (LLVM)
+  \item analyze the deficiencies in the optimization
+  \item share testcase with the community to gather ideas on fix
+  \item implement the best idea
   \end{itemize}
 }
 
-\frame{
-  Scheduler:
+\frame{\frametitle{Continuous testing}
+  100+ commits per day
   \begin{itemize}
-  \item Objective: Moving instructions around for improving performance
-  \item Analysis: Alias, Control Flow, Data Dependence
-  \item Constraints: Target hardware resources, Compilation time, Memory usage
+  \item compiler changes impact the shape of IR
+  \item pattern matching optimizations may not trigger
+  \end{itemize}
+
+  How do we keep track of the impact of all these changes?
+  \begin{itemize}
+  \item nightly testsuite runs
+  \item only variable: revisions of the compiler
+  \item perf and correctness regression detection
+  \item noise, smoothing, statistics, derivatives, etc.
+  \item git bisect is awesome
+  \item community report as a bug
   \end{itemize}
 }
 
-\frame{
-  Objective:
+\frame{\frametitle{Open source compiler releases}
   \begin{itemize}
-  \item Local as well as global scheduling
-  \item Moving instructions up/down
-  \item Profile information helpful in selecting code patch
+  \item GCC
+    \begin{itemize}
+    \item released once a year, quality based release (no P1 bugs)
+    \item dev stages: new development, bug fixing, regression only
+    \item release branches only accept regression fixes backports
+    \item released compilers are supported for several years
+    \end{itemize}
+  \item LLVM
+    \begin{itemize}
+    \item released twice a year, deadline based release
+    \item always in new development mode
+    \item once released, few or no patches backported
+    \item no community support for released compilers
+    \end{itemize}
   \end{itemize}
 }
 
-\frame{
-  Analysis:
+\frame{\frametitle{Compiler engineering perspectives}
   \begin{itemize}
-  \item Data dependence (True, Anti, Output)
-  \item Control dependence
-  \item Static analysis to identify frequently executed program points
+  \item number of compiler engineering positions are increasing
+  \item ARM ecosystem adds more processor variety and new architectures on the market
+  \item many HW companies have compiler teams
+  \item compiler teams are as central to the technology performance as microprocessor architecture teams
   \end{itemize}
 }
 
-\frame{
-  Constraints:
-  \begin{itemize}
-  \item Cost model to estimate resources
-  \item Timing constraints specified by the architecture
-  \item Limited program visibility
-  \end{itemize}
+\frame{\frametitle{Internship in the SARC compiler group}
+  
 }
 
-\frame{
-  loop transforms
-}
-
-\frame{
-  autoFDO
-  \begin{itemize}
-  \item LTO: 6\% speedup on SPEC benchmarks
-  \item PGO: -1\% degradation on SPEC
-  \item LTO + PGO: 12\% speedup on SPEC
-  \end{itemize}
-  Non linear speedup, as knowing more about the program helps.
-}
 \end{document}
